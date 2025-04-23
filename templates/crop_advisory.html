@@ -1,0 +1,134 @@
+{% extends "base_clean.html" %}
+
+{% block content %}
+<section class="advisory-section d-flex align-items-center justify-content-center" style="min-height: 100vh; background: url('/static/img/farm-bg.jpg') no-repeat center center fixed; background-size: cover;">
+  <div class="container text-center" style="background-color: rgba(255,255,255,0.9); padding: 40px; border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);">
+    
+    <div class="advisory-title mb-4">
+      <h1 style="font-size: 48px; font-weight: bold; color: #4CAF50; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);">
+        🌿 Smart Crop Advisory
+      </h1>
+    </div>
+
+    <!-- Location Form -->
+    <form method="get" action="{{ url_for('crop_advisory') }}" class="mb-4">
+      <div class="input-group justify-content-center">
+        <input type="text" name="city" class="form-control w-50" placeholder="Enter a city (e.g., Delhi)" required>
+        <button type="submit" class="btn btn-success">Check</button>
+      </div>
+    </form>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+
+        <!-- Weather Section -->
+        <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm">
+          <h4 style="color: #2E7D32;">🌤️ Weather-Based Crop Suggestions</h4>
+          
+          {% if city %}
+            <p>
+              <i class="bi bi-geo-alt-fill" style="color: #4CAF50;"></i>
+              <strong class="text-success">Location:</strong>
+              <span class="badge bg-light text-dark">{{ city }}</span>
+            </p>
+          {% endif %}
+
+          {% if weather_desc and weather_icon %}
+            <p>
+              <i class="bi bi-cloud-sun" style="color: #4CAF50;"></i>
+              <strong class="text-success">Current Weather:</strong>
+              <span class="text-muted fst-italic">{{ weather_desc }}</span>
+              
+              {% if weather_icon == "Clear" %}
+                ☀️
+              {% elif weather_icon == "Clouds" %}
+                ☁️
+              {% elif weather_icon == "Rain" %}
+                🌧️
+              {% elif weather_icon == "Thunderstorm" %}
+                ⛈️
+              {% elif weather_icon == "Snow" %}
+                ❄️
+              {% elif weather_icon == "Mist" or weather_icon == "Fog" %}
+                🌫️
+              {% else %}
+                🌡️
+              {% endif %}
+            </p>
+          {% endif %}
+
+          <p>
+            <strong class="text-success">Suggested crops based on current temperature ({{ temperature }}°C):</strong><br>
+            {% for crop in crops %}
+              <strong data-bs-toggle="tooltip" title="Ideal temperature for {{ crop }} is around {{ temperature }}°C">{{ crop }}</strong>{% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </p>
+        </div>
+
+        <!-- 5-Day Forecast Section -->
+        {% if forecast %}
+        <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm text-start">
+          <h4 style="color: #2E7D32;">🗓️ 5-Day Weather Forecast</h4>
+          <ul class="list-unstyled">
+            {% for day in forecast %}
+              <li class="mb-2">
+                📅 <strong>{{ day.date }}</strong>: 🌡️ {{ day.temp_day }}°C, 💧 {{ day.humidity }}%, 🌬️ {{ day.wind_speed }} m/s, 🌧️ {{ day.rain }} mm
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- Alerts Section -->
+        {% if alerts %}
+        <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm text-start">
+          <h4 style="color: #d32f2f;">⚠️ Advisory Alerts</h4>
+          <ul class="list-unstyled">
+            {% for note in alerts %}
+              <li class="mb-2">{{ note }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- Monthly Guide Section -->
+        <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm text-start">
+          <h4 style="color: #2E7D32;">🗓️ Monthly Guide - {{ month }}</h4>
+          <ul class="list-unstyled">
+            {% for item in monthly_guide %}
+              <li class="mb-2">🌱 {{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Pest Alert Section -->
+        <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm text-start">
+          <h4 style="color: #2E7D32;">🐛 Pest Alert</h4>
+          <p class="mb-0">
+            {{ pest_alert | safe }}
+          </p>
+        </div>
+
+        <!-- Fertilizer Tip Section -->
+        <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm text-start">
+          <h4 style="color: #2E7D32;">💧 Fertilizer Tip</h4>
+          <p class="mb-0">
+            {{ fertilizer_tip | safe }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bootstrap Tooltip Activation -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+      new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  });
+</script>
+{% endblock %}

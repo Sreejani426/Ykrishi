@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You | YKrishi Foundation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light text-center">
+
+    <div class="container mt-5">
+        <h1 class="text-success">Thank You!</h1>
+        <p class="lead">You have successfully subscribed to our newsletter with the email:</p>
+        <p><strong>{{ email }}</strong></p>
+
+        <a href="{{ url_for('login') }}" class="btn btn-primary mt-4">Back to Login</a>
+    </div>
+
+</body>
+</html>

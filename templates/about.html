@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body class="about-page">
+
+  {% include 'header.html' %}
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title light-background">
+      <div class="container">
+        <h1>About</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">About</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- About 2 Section -->
+    {% include 'about2.html' %}
+    <!-- /About 2 Section -->
+
+    <!-- Services Section -->
+
+
+    <!--Stats Section-->
+     <!--
+    <section id="services" class="services section light-background">
+
+      <div class="container">
+        <div class="row gy-4 justify-content-center">
+
+          <div class="col-lg-3">
+            <div class="services-item" data-aos="fade-up">
+              <div class="services-icon">
+                <i class="bi bi-bullseye"></i>
+              </div>
+              <div>
+                <h3>Technology</h3>
+                <p>Separated they live in Bookmarksgrove right at the coast</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="services-item" data-aos="fade-up" data-aos-delay="100">
+              <div class="services-icon">
+                <i class="bi bi-command"></i>
+              </div>
+              <div>
+                <h3>Web Design</h3>
+                <p>Separated they live in Bookmarksgrove right at the coast</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="services-item" data-aos="fade-up" data-aos-delay="200">
+              <div class="services-icon">
+                <i class="bi bi-bar-chart"></i>
+              </div>
+              <div>
+                <h3>Branding</h3>
+                <p>Separated they live in Bookmarksgrove right at the coast</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section> --> <!-- /Services Section -->
+
+    <!-- Stats Section -->
+    <!--
+    <section id="stats" class="stats section light-background">
+
+      <div class="container">
+
+        <div class="row gy-4 justify-content-center">
+
+          <div class="col-lg-5">
+            <div class="images-overlap">
+              <img src="static/img/conso.jpg" alt="student" class="img-fluid img-1" data-aos="fade-up">
+            </div>
+          </div>
+
+          <div class="col-lg-4 ps-lg-5">
+            <span class="content-subtitle">Why Us</span>
+            <h2 class="content-title">Far far away Behind the Word Mountains</h2>
+            <p class="lead">
+              Far far away, behind the word mountains, far from the countries
+              Vokalia and Consonantia.
+            </p>
+            <p class="mb-5">
+              There live the blind texts. Separated they live in Bookmarksgrove
+              right at the coast of the Semantics, a large language ocean.
+            </p>
+            <div class="row mb-5 count-numbers">
+
+             <div class="col-4 counter" data-aos="fade-up" data-aos-delay="100">
+    <span data-purecounter-separator="true" data-purecounter-start="0" data-purecounter-end="3919" data-purecounter-duration="1" class="purecounter number"></span>
+    <span class="d-block">Coffee</span>
+  </div>
+
+  <div class="col-4 counter" data-aos="fade-up" data-aos-delay="200">
+    <span data-purecounter-separator="true" data-purecounter-start="0" data-purecounter-end="2831" data-purecounter-duration="1" class="purecounter number"></span>
+    <span class="d-block">Codes</span>
+  </div>
+
+  <div class="col-4 counter" data-aos="fade-up" data-aos-delay="300">
+    <span data-purecounter-separator="true" data-purecounter-start="0" data-purecounter-end="1914" data-purecounter-duration="1" class="purecounter number"></span>
+    <span class="d-block">Projects</span>
+  </div>
+-->
+ 
+
+
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section> <!-- /Stats Section -->
+
+
+    <!-- Team Section -->
+    <section id="team" class="team section">
+
+      <div class="site-section slider-team-wrap">
+        <div class="container">
+
+          <div class="slider-nav d-flex justify-content-end mb-3">
+            <a href="#" class="js-prev js-custom-prev"><i class="bi bi-arrow-left-short"></i></a>
+            <a href="#" class="js-next js-custom-next"><i class="bi bi-arrow-right-short"></i></a>
+          </div>
+
+          <div class="swiper init-swiper" data-aos="fade-up" data-aos-delay="100">
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "1",
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                },
+                "navigation": {
+                  "nextEl": ".js-custom-next",
+                  "prevEl": ".js-custom-prev"
+                },
+                "breakpoints": {
+                  "640": {
+                    "slidesPerView": 2,
+                    "spaceBetween": 30
+                  },
+                  "768": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 30
+                  },
+                  "1200": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 30
+                  }
+                }
+              }
+            </script>
+            <!--
+<div class="swiper-wrapper">
+  <div class="swiper-slide">
+    <div class="team">
+      <div class="pic">
+        <img src="assets/img/team/team-1.jpg" alt="Image" class="img-fluid">
+      </div>
+      <h3 clas="">
+        <a href="#"><span class="">Jeremy</span> Walker</a>
+      </h3>
+      <span class="d-block position">CEO, Founder, Atty.</span>
+      <p>
+        Separated they live in. Separated they live in Bookmarksgrove
+        right at the coast of the Semantics, a large language ocean.
+      </p>
+      <p class="mb-0">
+        <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+      </p>
+    </div>
+  </div>
+  <div class="swiper-slide">
+    <div class="team">
+      <div class="pic">
+        <img src="assets/img/team/team-2.jpg" alt="Image" class="img-fluid">
+      </div>
+      <h3 clas="">
+        <a href="#"><span class="">Lawson</span> Arnold</a>
+      </h3>
+      <span class="d-block position">CEO, Founder, Atty.</span>
+      <p>
+        Separated they live in. Separated they live in Bookmarksgrove
+        right at the coast of the Semantics, a large language ocean.
+      </p>
+      <p class="mb-0">
+        <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+      </p>
+    </div>
+  </div>
+  <div class="swiper-slide">
+    <div class="team">
+      <div class="pic">
+        <img src="assets/img/team/team-3.jpg" alt="Image" class="img-fluid">
+      </div>
+      <h3 clas="">
+        <a href="#"><span class="">Patrik</span> White</a>
+      </h3>
+      <span class="d-block position">CEO, Founder, Atty.</span>
+      <p>
+        Separated they live in. Separated they live in Bookmarksgrove
+        right at the coast of the Semantics, a large language ocean.
+      </p>
+      <p class="mb-0">
+        <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+      </p>
+    </div>
+  </div>
+  <div class="swiper-slide">
+    <div class="team">
+      <div class="pic">
+        <img src="assets/img/team/team-4.jpg" alt="Image" class="img-fluid">
+      </div>
+      <h3 clas="">
+        <a href="#"><span class="">Kathryn</span> Ryan</a>
+      </h3>
+      <span class="d-block position">CEO, Founder, Atty.</span>
+      <p>
+        Separated they live in. Separated they live in Bookmarksgrove
+        right at the coast of the Semantics, a large language ocean.
+      </p>
+      <p class="mb-0">
+        <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+      </p>
+    </div>
+  </div>
+  <!-- <div class="swiper-slide"></div> -->
+</div>
+-->
+
+
+
+
+    <!-- Testimonials Section -->
+
+<section id="testimonials" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h5 class="text-success">What People Say</h5>
+      <h2 class="fw-bold">Testimonials</h2>
+      <p class="text-muted">Voices of the farmers and changemakers we work with.</p>
+    </div>
+
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+      <!-- Testimonial 1 -->
+<div class="carousel-item active text-center">
+  <img src="{{ url_for('static', filename='img/drip.jpg') }}"
+       alt="Farmer 1"
+       style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); margin-bottom: 20px;">
+  <blockquote class="blockquote">
+    <p class="mb-3">“Thanks to YKrishi’s drip irrigation program, my field productivity has significantly improved.”</p>
+  </blockquote>
+  <footer class="blockquote-footer">Ramesh Gowda, <cite title="Location">Hassan, Karnataka</cite></footer>
+</div>
+
+<!-- Testimonial 2 -->
+<div class="carousel-item text-center">
+  <img src="{{ url_for('static', filename='img/soi.jpg') }}"
+       alt="Farmer 2"
+       style="width: 300px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); margin-bottom: 20px;">
+  <blockquote class="blockquote">
+    <p class="mb-3">“The training sessions on soil testing were eye-opening. Now I know exactly what my land needs.”</p>
+  </blockquote>
+  <footer class="blockquote-footer">Anita Devi, <cite title="Location">Patna, Bihar</cite></footer>
+</div>
+
+<!-- Testimonial 3 -->
+<div class="carousel-item text-center">
+  <img src="{{ url_for('static', filename='img/volunteering.jpg') }}"
+       alt="Volunteer"
+       style="width: 220px; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); margin-bottom: 20px;">
+  <blockquote class="blockquote">
+    <p class="mb-3">“Volunteering with YKrishi helped me understand real-world agri challenges and solutions.”</p>
+  </blockquote>
+  <footer class="blockquote-footer">Priya Sharma, <cite title="Role">AgriTech Volunteer</cite></footer>
+</div>
+
+
+
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-success rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-success rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  {% include 'footer.html' %}
+
+  
+  {% include 'foot.html' %}
+</body>
+
+</html>
+
