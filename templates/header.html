@@ -2,9 +2,12 @@
   <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
     <a href="{{ url_for('home') }}" class="logo d-flex align-items-center">
-      <!-- <img src="img/logo.png" alt=""> -->
-      <h1 class="sitename">Ykrishi Foundation.</h1>
+      <img src="{{ url_for('static', filename='img/logo.jpeg') }}" 
+           alt="Ykrishi Logo" 
+           style="height: 60px !important; width: auto !important; max-height: none !important; margin-right: 10px;">
+      <h1 class="sitename mb-0">Ykrishi Foundation.</h1>
     </a>
+    
 
     <nav id="navmenu" class="navmenu">
       <ul>
@@ -19,6 +22,7 @@
         {#<li><a href="{{ url_for('blog') }}">Blog</a></li>#}
         <li><a href="{{ url_for('contact') }}">Contact</a></li>
         <li><a class="nav-link" href="{{ url_for('crop_advisory') }}">Crop Advisory</a></li>
+
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
