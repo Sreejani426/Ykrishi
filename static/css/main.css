@@ -2484,7 +2484,7 @@ crop advisory
 }
 
 body {
-  background: url('img/bg1.png') no-repeat center center fixed;
+  background: url('/static/css/img/bg1.png') no-repeat center center fixed;
   background-size: cover;
 }
 
