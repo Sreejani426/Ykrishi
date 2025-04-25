@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL
 )
 ''')
-   
+
+
 conn.commit()
 conn.close()
 
