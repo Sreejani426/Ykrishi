@@ -16,8 +16,8 @@ __pycache__/
 # Ignore logs and database files
 logs/
 *.log
-*.sqlite3
-db.sqlite3
+#*.sqlite3
+#db.sqlite3
 
 # Ignore compiled files
 *.so
