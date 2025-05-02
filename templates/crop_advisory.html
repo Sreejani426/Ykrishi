@@ -65,20 +65,6 @@
           </p>
         </div>
 
-        <!-- 5-Day Forecast Section -->
-        {% if forecast %}
-        <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm text-start">
-          <h4 style="color: #2E7D32;">🗓️ 5-Day Weather Forecast</h4>
-          <ul class="list-unstyled">
-            {% for day in forecast %}
-              <li class="mb-2">
-                📅 <strong>{{ day.date }}</strong>: 🌡️ {{ day.temp_day }}°C, 💧 {{ day.humidity }}%, 🌬️ {{ day.wind_speed }} m/s, 🌧️ {{ day.rain }} mm
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
-
         <!-- Alerts Section -->
         {% if alerts %}
         <div class="advisory-card mb-4 p-4 border rounded bg-white shadow-sm text-start">
