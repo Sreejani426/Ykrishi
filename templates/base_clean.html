@@ -1,17 +1,18 @@
 <!-- templates/base_clean.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>YKrishi Crop Advisory</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-</head>
-<body style="background: url('/static/img/bg1.png') no-repeat center center fixed; background-size: cover;">
+{% include 'head.html' %}
+<body>
 
-  <main>
+  {% include 'header.html' %}
+
+  <main class="main">
     {% block content %}{% endblock %}
   </main>
 
+  {% include 'footer.html' %}
+  {% include 'foot.html' %}
+
 </body>
 </html>
+

@@ -179,6 +179,12 @@ h6 {
     padding: 0;
   }
 
+  nav a.active {
+    color: #28a745; /* Bootstrap's green color */
+    font-weight: bold;
+  }
+  
+
   .navmenu ul {
     margin: 0;
     padding: 0;
