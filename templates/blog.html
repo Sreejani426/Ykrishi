@@ -1,0 +1,55 @@
+{% extends "base_clean.html" %}
+
+{% block head %}
+<style>
+  body {
+    background-color: #121212;
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  .card {
+    background-color: #212529;
+    color: #ffc107;
+    margin-bottom: 2rem;
+  }
+  .card-title {
+    color: #ffeb3b;
+  }
+  .card-text {
+    color: #f5f5f5;
+  }
+  .btn-readmore {
+    background-color: #ffc107;
+    color: #000;
+  }
+  .btn-readmore:hover {
+    background-color: #ffdb4d;
+    color: #000;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container pt-5">
+  <h1 class="text-center text-warning mb-5">YKrishi Blog</h1>
+
+  {% for blog in posts %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ blog['title'] }}</h5>
+      <p class="card-text">
+        {{ blog['content'][:300] }}{% if blog['content']|length > 300 %}...{% endif %}
+      </p>
+      <small>Posted on {{ blog['created_at'] }}</small>
+      <!-- Optional: Add Read More button or link if you want -->
+    </div>
+  </div>
+  {% else %}
+    <p>No blog posts found.</p> 
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

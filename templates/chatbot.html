@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HuggingFace Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        #chatbox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            font-size: 14px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+        .user { color: blue; }
+        .bot { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <p>This is the place where you can put your questions</p>
+    <div id="chatbox"></div>
+    <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
+    <button id="send-button">Send</button>
+
+    <script>
+        document.querySelector("#send-button").addEventListener("click", function() {
+            const userMessage = document.querySelector("#user-input").value;
+
+            if (!userMessage.trim()) return;
+
+            const chatbox = document.querySelector("#chatbox");
+            chatbox.innerHTML += `<p class="user"><strong>You:</strong> ${userMessage}</p>`;
+
+            fetch("/chat", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ message: userMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatbox.innerHTML += `<p class="bot"><strong>Bot:</strong> ${data.reply}</p>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                chatbox.innerHTML += `<p class="bot"><strong>Bot:</strong> Error reaching server.</p>`;
+            });
+
+            document.querySelector("#user-input").value = '';
+        });
+
+        // Enable Enter key to send message
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('user-input').addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    document.getElementById('send-button').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

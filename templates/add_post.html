@@ -1,0 +1,26 @@
+<!-- templates/add_blog.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Add a New Blog Post</h1>
+    <form method="post" action="{{ url_for('add_blog') }}">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" rows="10" cols="50" required></textarea><br><br>
+
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author"><br><br>
+
+        <button type="submit">Add Blog</button>
+    </form>
+
+    <br><a href="{{ url_for('blog') }}">Back to Blog List</a>
+</body>
+</html>

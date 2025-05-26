@@ -2,6 +2,8 @@ import sqlite3
 
 conn = sqlite3.connect('users.db')
 cursor = conn.cursor()
+
+# Create users table
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,4 +15,4 @@ CREATE TABLE IF NOT EXISTS users (
 conn.commit()
 conn.close()
 
-print("Database and users table created successfully!")
+print("Database, users table are created successfully!")
