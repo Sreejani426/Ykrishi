@@ -1,0 +1,18 @@
+<!-- templates/base_clean.html -->
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+<body>
+
+  {% include 'header.html' %}
+
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'footer.html' %}
+  {% include 'foot.html' %}
+
+</body>
+</html>
+

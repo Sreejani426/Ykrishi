@@ -1,0 +1,97 @@
+<footer id="footer" class="footer light-background">
+  <div class="container">
+    <div class="row g-4">
+
+      {% if request.endpoint != 'contact' %}
+      <!-- Connect & Subscribe Sections -->
+      <div class="col-md-6 col-lg-3 pl-lg-5">
+        <div class="widget">
+          <h3 class="widget-heading">Connect</h3>
+            <ul class="list-unstyled social-icons light mb-3">
+              <!--
+              <li>
+                <a href="#"><span class="bi bi-facebook"></span></a>
+              </li>
+              <li>
+                <a href="#"><span class="bi bi-twitter-x"></span></a>
+              </li>
+              -->
+              <li>
+                <a href="https://www.linkedin.com/company/ykrishi-foundation/" target="_blank" >
+                  <span class="bi bi-linkedin"></span>
+                </a>
+              </li>
+              <!--
+              <li>
+                <a href="https://www.instagram.com/ykrishi.foundation/" target="_blank" title="Follow us on Instagram">
+                  <span class="bi bi-instagram"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#"><span class="bi bi-google"></span></a>
+              </li>
+              <li>
+                <a href="#"><span class="bi bi-google-play"></span></a>
+              </li>
+              -->
+            </ul>
+            
+          
+        </div>
+
+        <div class="widget">
+          <div class="footer-subscribe">
+            <h3 class="widget-heading">Subscribe</h3>
+
+            <!-- Flash message from Flask -->
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="alert alert-success p-2 mb-2 fade-out" id="flash-message">
+                  {{ messages[0] }}
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            <!-- Subscribe form -->
+            <form action="/subscribe" method="POST">
+              <div class="mb-2 d-flex">
+                <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-link">
+                  <span class="bi bi-arrow-right"></span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Auto-hide flash script -->
+            <script>
+              setTimeout(function () {
+                var flash = document.getElementById("flash-message");
+                if (flash) {
+                  flash.style.opacity = "0";
+                  setTimeout(() => flash.style.display = "none", 600);
+                }
+              }, 3000);
+            </script>
+
+            <!-- Smooth fade-out styling -->
+            <style>
+              .fade-out {
+                transition: opacity 0.6s ease-in-out;
+              }
+            </style>
+
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+    <div class="copyright d-flex flex-column flex-md-row align-items-center justify-content-md-between">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Active.</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </div>
+</footer>

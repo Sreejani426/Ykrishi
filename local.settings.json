@@ -1,0 +1,38 @@
+{
+
+
+    
+    "IsEncrypted": false,
+    
+    "FUNCTIONS WORKER_PROCESS_COUNT": 10,
+    
+    "Values":
+    {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    
+    "AzureWebJobs.dqpm_delete_component. Disabled": "false",
+    
+    "coddoadevwesteurope@1_DOCUMENTDB": "Account Endpoint=https://cod-doa-",
+    
+    "database_name": "db-doacc-dev",
+    
+    "AzureWebJobs.dqpm_audit.Disabled ": "true",
+    
+    "coddoadevwesteurope@2_DOCUMENTDB": "AccountEndpoint=http://cod-doa-",
+    
+    "AzureWebJobs.dts_audits. Disabled": "true",
+    
+    "AzureWebJobs.dts_defaults_audit.Disabled": "true",
+    
+    "AzureWebJobs.study_dts_audit.Disabled": "true",
+    
+    "AzureWebJobs.dqpm_defaults_audit.Disabled": "true",
+    
+    "AzureWebJobs.email_listener.Disabled": "true",
+    
+    "AzureWebJobs.uat_study_validation_trigger.Disabled": "true"
+    
+}
+}
