@@ -1,2 +1,0 @@
-# YkrishiFoundation
-webiste code 

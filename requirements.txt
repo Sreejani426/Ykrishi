@@ -14,3 +14,4 @@ pydantic==2.11.4
 starlette==0.46.2
 bcrypt==4.3.0
 openai==1.78.1
+PyJWT==2.10.1
