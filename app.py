@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session,  get_flashed_messages , jsonify, make_response
 from flasgger import Swagger , swag_from
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
 import jwt
 import os
 import sqlite3
