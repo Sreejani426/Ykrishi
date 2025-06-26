@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<body class="team-page">
+
+  {% include 'header.html' %}
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title light-background">
+      <div class="container">
+        <h1>Team</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Team</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Team Section -->
+    <section id="team" class="team section">
+
+      <div class="site-section slider-team-wrap">
+        <div class="container">
+
+          <div class="slider-nav d-flex justify-content-end mb-3">
+            <a href="#" class="js-prev js-custom-prev"><i class="bi bi-arrow-left-short"></i></a>
+            <a href="#" class="js-next js-custom-next"><i class="bi bi-arrow-right-short"></i></a>
+          </div>
+
+          <div class="swiper init-swiper" data-aos="fade-up" data-aos-delay="100">
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "1",
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                },
+                "navigation": {
+                  "nextEl": ".js-custom-next",
+                  "prevEl": ".js-custom-prev"
+                },
+                "breakpoints": {
+                  "640": {
+                    "slidesPerView": 2,
+                    "spaceBetween": 30
+                  },
+                  "768": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 30
+                  },
+                  "1200": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 30
+                  }
+                }
+              }
+            </script>
+            <div class="container">
+              <div class="row">
+                  <div class="col-md-3">
+                      <div class="team">
+                          <div class="pic">
+                              <img src="{{ url_for('static', filename='img/team/swaminanthan.avif') }}" alt="Image" class="img-fluid">
+                          </div>
+                          <h3><a href="#">M.S.Swaminanthan</a></h3>
+                          <span class="d-block position">Agriculture Scientist</span>
+                          <p>
+                            Spearheaded India's agricultural transformation, known as the "father of the Green Revolution" in India, and a global leader of the green revolution and has been described by the UN as"Programme as “the Father of Economic Ecology”      </p>
+                      </div>
+                  </div>
+      
+                  <div class="col-md-3">
+                      <div class="team">
+                          <div class="pic">
+                              <img src="{{ url_for('static', filename='img/team/Norman.jpg') }}" alt="Image" class="img-fluid">
+                          </div>
+                          <h3><a href="#">Norman Barluag</a></h3>
+                          <span class="d-block position">Father of Green Revolution</span>
+                          <p>
+                            Norman Borlaug, often called the "Father of the Green Revolution," revolutionized agriculture by developing high-yield, disease-resistant wheat varieties that dramatically increased food production in Mexico, India.
+                          </p>
+                      </div>
+                  </div>
+      
+                  <div class="col-md-3">
+                      <div class="team">
+                          <div class="pic">
+                              <img src="{{ url_for('static', filename='img/team/George-Washington-Carver.webp') }}" alt="Image" class="img-fluid">
+                          </div>
+                          <h3><a href="#">George Washington Carver</a></h3>
+                          <span class="d-block position">Agriculture Scientist</span>
+                          <p>
+                            Dr. Carver established an agriculture extension in Alabama and founded an industrial research lab where he worked tirelessly on the development of hundreds of applications for new plants.
+                          </p>
+                      </div>
+                  </div>
+      
+                  <div class="col-md-3">
+                      <div class="team">
+                          <div class="pic">
+                              <img src="{{ url_for('static', filename='img/team/Rajendra Singh.jpg') }}" alt="Image" class="img-fluid">
+                          </div>
+                          <h3><a href="#">Rajendra Singh Paroda</a></h3>
+                          <span class="d-block position">Agriculture Scientist</span>
+                          <p>
+                            Rajendra Singh Paroda born 1942 in Saradhana Ajmer, Rajasthan is an Indian agricultural scientist. He was the former Director General of the Indian Council of Agricultural Research  and Secretary, Department of Agricultural Research .
+                          </p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+
+          <div class="container advisory-board-section">
+            <h2 class="text-center" style="margin-top: 80px;">Advisory Board</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="advisor">
+                        <div class="pic">
+                            <img src="{{ url_for('static', filename='img/team/Rajesh.png') }}" alt="Image" class="img-fluid">
+                        </div>
+                        <h3>Dr. Rajesh Kumar</h3>
+                        <span class="d-block position">Agricultural Scientist</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="advisor">
+                        <div class="pic">
+                            <img src="{{ url_for('static', filename='img/team/meera joshi.jfif') }}" alt="Image" class="img-fluid">
+                        </div>
+                        <h3>Meera Joshi</h3>
+                        <span class="d-block position">Sustainable Farming Expert</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="advisor">
+                        <div class="pic">
+                            <img src="{{ url_for('static', filename='img/team/anilsharma.jfif') }}" alt="Image" class="img-fluid">
+                        </div>
+                        <h3>Dr. Anil Sharma</h3>
+                        <span class="d-block position">Agritech Entrepreneur</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </section><!-- /Team Section -->
+
+  </main>
+
+  {% include 'footer.html' %}
+
+  {% include 'foot.html' %}
+
+</body>
+
+</html>

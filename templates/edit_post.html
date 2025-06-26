@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background: #f9f9f9;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            max-width: 600px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #555;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+ 
+    <h1>Edit Post</h1>
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('edit_post', post_id=post['id']) }}">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" value="{{ post['title'] }}" required />
+ 
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" rows="10" required>{{ post['content'] }}</textarea>
+ 
+    <label for="image_file">Upload Image:</label>
+    <div id="drop-area" class="border" style="padding: 20px; border: 2px dashed #ccc; text-align: center; border-radius: 6px; background-color: #fff; margin-top: 10px;">
+        <p>Drag & drop an image here, or click to browse</p>
+        <input type="file" id="fileElem" name="image_file" accept="image/*" style="display: none;">
+        <label for="fileElem" style="cursor: pointer; color: #007BFF;">Browse</label>
+        <div id="preview" class="mt-2">
+            {% if post['image_url'] %}
+                <img src="{{ post['image_url'] }}" alt="Current Image" style="max-width:100%; margin-top:10px;" />
+            {% endif %}
+        </div>
+    </div>
+ 
+    <input type="submit" value="Update Post" />
+    </form>
+ 
+ 
+    <a href="{{ url_for('blog') }}">Back to Blog</a>
+ 
+    <script>
+    const dropArea = document.getElementById("drop-area");
+    const fileInput = document.getElementById("fileElem");
+    const preview = document.getElementById("preview");
+ 
+    ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+        dropArea.addEventListener(eventName, e => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+ 
+    ["dragenter", "dragover"].forEach(eventName => {
+        dropArea.style.borderColor = "#007BFF";
+    });
+ 
+    ["dragleave", "drop"].forEach(eventName => {
+        dropArea.style.borderColor = "#ccc";
+    });
+ 
+    dropArea.addEventListener("drop", e => {
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+        previewFile(files[0]);
+    });
+ 
+    fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+            previewFile(fileInput.files[0]);
+        }
+    });
+ 
+    function previewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            preview.innerHTML = "";
+            const img = document.createElement("img");
+            img.src = reader.result;
+            img.style.maxWidth = "100%";
+            img.style.marginTop = "10px";
+            preview.appendChild(img);
+        };
+    }
+</script>
+ 
+ 
+</body>
+</html>
+ 

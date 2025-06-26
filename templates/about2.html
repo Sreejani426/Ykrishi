@@ -1,0 +1,200 @@
+<!-- About 2 Section: Our Mission -->
+
+
+
+
+
+<!-- About 3 Section: Environmental Commitment -->
+<section id="about-3" class="about-3 section light-background">
+  <div class="container">
+    <div class="content">
+      <div class="row justify-content-center align-items-center">
+
+        <!-- Text Content -->
+        <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
+          <span class="content-subtitle">Let’s Promote The Ecology</span>
+          <h2 class="content-title">Give Back To The Nature & <strong>Make Environment Save</strong></h2>
+          <p class="lead">Our policies and programs:</p>
+          <ul class="list-unstyled">
+            <li>🌱 Encourage and support sustainable natural resource use and management</li>
+            <li>🛡️ Protect the health and safety of plant and animal industries</li>
+            <li>🔧 Enable industries to adapt in a fast-changing international and economic environment</li>
+            <li>📈 Help improve market access and performance for agriculture and food sectors</li>
+          </ul>
+        </div>
+
+        <!-- Overlapping Images -->
+        <div class="col-md-6" data-aos="fade-left">
+          <div class="position-relative image-stack-container">
+            <img src="{{ url_for('static', filename='img/krishi1.jpg') }}" class="img-fluid rounded hover-img main-img" alt="Nature 1">
+            <img src="{{ url_for('static', filename='img/krishi2.jpg') }}" class="img-fluid rounded hover-img overlay-img" alt="Nature 2">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- YKrishi Foundation Info Section -->
+<section id="about-ykrishi" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-success mb-3">About YKrishi Foundation</h2>
+      <p class="lead text-muted">
+        Empowering farmers with knowledge, technology, and sustainable agricultural practices.
+      </p>
+    </div>
+
+    <div class="row gy-5 text-center">
+      <!-- Our Goal -->
+      <div class="col-md-6 col-lg-3">
+        <div class="mb-3">
+          <i class="bi bi-bullseye display-4 text-primary"></i>
+        </div>
+        <h5 class="fw-semibold mb-2">Our Goal</h5>
+        <p class="text-muted small px-lg-3">
+          Bridging the gap between traditional farming and modern innovation by providing tools, training, and support.
+        </p>
+      </div>
+
+      <!-- Our Impact -->
+      <div class="col-md-6 col-lg-3">
+        <div class="mb-3">
+          <i class="bi bi-graph-up-arrow display-4 text-success"></i>
+        </div>
+        <h5 class="fw-semibold mb-2">Our Impact</h5>
+        <p class="text-muted small px-lg-3">
+          Over 5,000 farmers trained, smart irrigation in 20+ villages, and 30% increase in crop yield.
+        </p>
+      </div>
+
+      <!-- Our Vision -->
+      <div class="col-md-6 col-lg-3">
+        <div class="mb-3">
+          <i class="bi bi-eye-fill display-4 text-warning"></i>
+        </div>
+        <h5 class="fw-semibold mb-2">Our Vision</h5>
+        <p class="text-muted small px-lg-3">
+          To create a self-reliant and digitally empowered farming community through innovation and collaboration.
+        </p>
+      </div>
+
+      <!-- Core Values -->
+      <div class="col-md-6 col-lg-3">
+        <div class="mb-3">
+          <i class="bi bi-heart-fill display-4 text-danger"></i>
+        </div>
+        <h5 class="fw-semibold mb-2">Core Values</h5>
+        <ul class="list-unstyled text-muted small text-start d-inline-block mx-auto">
+          <li><strong>Integrity</strong> – Transparent & honest efforts</li>
+          <li><strong>Innovation</strong> – Smart solutions for agriculture</li>
+          <li><strong>Community</strong> – Supporting rural growth</li>
+          <li><strong>Sustainability</strong> – Long-term environmental focus</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <style>
+    .hover-effect {
+      transition: all 0.3s ease;
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .hover-effect:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .card i {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-effect:hover i {
+      transform: scale(1.2);
+    }
+  </style>
+</section>
+
+
+
+<!-- Association Logos Section -->
+<section id="associations" class="py-5 bg-light text-center">
+  <div class="container">
+    <h5 class="text-success mb-2">Helping Hands</h5> <!-- Added margin-bottom here -->
+    <h2 class="fw-bold mb-4">In Association</h2>
+    
+    <div class="row justify-content-center align-items-center g-4">
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="logo-wrapper">
+          <img src="{{ url_for('static', filename='img/krishikalpa.png') }}" alt="Association 1">
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="logo-wrapper">
+          <img src="{{ url_for('static', filename='img/krishipragathi.jpg') }}" alt="Association 2">
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="logo-wrapper">
+          <img src="{{ url_for('static', filename='img/krishimitra.jpg') }}" alt="Association 3">
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="logo-wrapper">
+          <img src="{{ url_for('static', filename='img/krishivignan.png') }}" alt="Association 4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CSS for hover effect and styling -->
+  <style>
+    .grayscale {
+      filter: grayscale(100%);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      filter: grayscale(0%);
+      transform: scale(1.1);
+    }
+
+    .logo-wrapper {
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo-wrapper img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: grayscale(100%);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo-wrapper:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.1);
+    }
+  </style>
+</section>
+
+
+
+
+

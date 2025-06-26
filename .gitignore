@@ -1,0 +1,44 @@
+# Ignore Python virtual environments
+venv/
+.env/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore environment configuration files
+*.env
+.envrc
+*.ini
+*.cfg
+
+# Ignore logs and database files
+logs/
+*.log
+#*.sqlite3
+#db.sqlite3
+
+# Ignore compiled files
+*.so
+*.o
+*.a
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore test coverage and profiling files
+.coverage
+*.cover
+.cache
+nosetests.xml
+pytest_cache/
+
+
+!users.db

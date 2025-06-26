@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ykrishi-app
+    env: python
+    buildCommand:  pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    region: oregon
+    plan: free
+    branch: main
+    runtime: python
+    pythonVersion: 3.11

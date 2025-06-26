@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      background-image: url('/static/bg.jpg'); /* Optional */
+      background-size: cover;
+      font-family: Arial;
+    }
+    .form-container {
+      width: 300px;
+      margin: 100px auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px gray;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      margin-top: 15px;
+    }
+    a {
+      color: blue;
+      text-decoration: underline;
+    }
+    .flash-message {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .flash-message.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .flash-message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-container">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        <script>
+          setTimeout(() => {
+            const flashContainer = document.getElementById('flash-container');
+            if (flashContainer) flashContainer.style.display = 'none';
+          }, 3000);
+        </script>
+      {% endif %}
+    {% endwith %}
+
+    <h2 style="text-align:center;">Login</h2>
+    <form method="POST" action="/login">
+      <input type="text" name="username" placeholder="Username" required autocomplete="off">
+      <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
+      <button type="submit">Login</button>
+    </form>
+
+    {% if token %}
+      <label style="margin-top:15px;"><strong>Token</strong></label>
+      <textarea id="jwtToken" readonly style="width:100%; height:60px; margin-top:10px;">{{ token }}</textarea>
+      <button onclick="copyToken()">Copy Token</button>
+    <script>
+      function copyToken() {
+        const tokenField = document.getElementById('jwtToken');
+        tokenField.select();
+        tokenField.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Token copied to clipboard!");
+      }
+    </script>
+    {% endif %}
+
+    <p style="text-align:center; margin-top:15px;">
+      Don't have an account?
+      <a href="/register">Register → click here</a>
+    </p>
+  </div>
+</body>
+</html>

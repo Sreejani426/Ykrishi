@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | YKrishi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #00796b;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background-color: #e0f2f1;
+            padding: 20px;
+            border-radius: 8px;
+            width: 22%;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #004d40;
+        }
+
+        .stat-card p {
+            margin: 5px 0 0;
+            color: #00695c;
+        }
+
+        .actions {
+            margin-top: 30px;
+        }
+
+        .actions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .actions li {
+            margin: 10px 0;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: #00796b;
+            font-weight: bold;
+        }
+
+        .table-section {
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #b2dfdb;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #b2dfdb;
+        }
+
+        .logout {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .logout button {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .logout button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Admin {{ session['username'] }}!</h1>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h2>{{ total_users }}</h2>
+                <p>Total Users</p>
+            </div>
+            <div class="stat-card">
+                <h2>{{ pending_posts }}</h2>
+                <p>Pending Posts</p>
+            </div>
+            <div class="stat-card">
+                <h2>{{ total_posts }}</h2>
+                <p>Total Posts</p>
+            </div>
+            <div class="stat-card">
+                <h2>✔</h2>
+                <p>System Status</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <h2>Admin Actions</h2>
+            <ul>
+                <li><a href="{{ url_for('manage_users') }}">Manage Users</a></li>
+                <li><a href="{{ url_for('moderate_posts') }}">Moderate Posts</a></li>
+                <li><a href="{{ url_for('site_settings') }}">Site Settings</a></li>
+                <li><a href="{{ url_for('view_reports') }}">View Reports</a></li>
+            </ul>
+        </div>
+
+        <div class="table-section">
+            <h2>Recent Activity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Action</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in activity_logs %}
+                    <tr>
+                        <td>{{ log.user }}</td>
+                        <td>{{ log.action }}</td>
+                        <td>{{ log.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="logout">
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
