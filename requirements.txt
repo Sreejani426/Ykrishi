@@ -19,3 +19,4 @@ idna==3.10
 click==8.1.8
 colorama==0.4.6
 secure_filename==1.0.0
+psycopg2-binary==2.9.9

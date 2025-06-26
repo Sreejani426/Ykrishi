@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flasgger import Swagger , swag_from
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
+from models import db 
 import jwt
 import os
 import sqlite3
@@ -22,10 +23,18 @@ app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
 bcrypt = Bcrypt(app)
 
-# Use SQLite locally and PostgreSQL on Render
-app.config['SQLALCHEMY_DATABASE-URI'] = os.getenv('DATABASE_URL', 'SQLITE:///users.db')
-app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
-db = SQLAlchemy(app)
+
+# Use PostgreSQL on Render (via DATABASE_URL) or fallback to SQLite locally
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///users.db")
+
+# Fix Render's postgres URL if needed (old URLs start with "postgres://")
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
 
 #JWT config
 SECRET_KEY = os.getenv('JWT_SECRET_KEY') or 'default_jwt_secret'
@@ -41,7 +50,8 @@ def home():
     return render_template('index.html')
 
 def get_user_by_username(username):
-    return User.query.filter_by(username=username).first()
+    return User.query.filter(User.username.ilike(username)).first()
+
 
 def create_user(username, hashed_pw, role):
     new_user = User(username=username, password=hashed_pw, role=role)
