@@ -19,10 +19,18 @@ from urllib.parse import urlparse, urljoin
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
+bcrypt = Bcrypt(app)
+
+# Use SQLite locally and PostgreSQL on Render
+app.config['SQLALCHEMY_DATABASE-URI'] = os.getenv('DATABASE_URL', 'SQLITE:///users.db')
+app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+#JWT config
 SECRET_KEY = os.getenv('JWT_SECRET_KEY') or 'default_jwt_secret'
 ALGORITHM = 'HS256'
 TOKEN_EXPIRATION_MINUTES = 60
-bcrypt = Bcrypt(app)
+
 
 
 
@@ -31,22 +39,13 @@ bcrypt = Bcrypt(app)
 def home():
     return render_template('index.html')
 
-
 def get_user_by_username(username):
-    conn = sqlite3.connect('users.db')
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
-    user = cur.fetchone()
-    conn.close()
-    return user
+    return User.query.filter_by(username=username).first()
 
 def create_user(username, hashed_pw, role):
-    conn = sqlite3.connect('users.db')
-    cur = conn.cursor()
-    cur.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, hashed_pw, role))
-    conn.commit()
-    conn.close()
+    new_user = User(username=username, password=hashed_pw, role=role)
+    db.session.add(new_user)
+    db.session.commit()
 
 def check_password(hashed_password, plain_password):
     return bcrypt.check_password_hash(hashed_password, plain_password)
@@ -105,13 +104,11 @@ def require_roles(*allowed_roles):
 
 
 
-@app.route('/register', methods=['GET'])
-def show_register_form():
-    return render_template('register.html')
-
-# Handle the form submission
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+
     username = request.form['username'].strip().lower()
     password = request.form['password']
     confirm_password = request.form['confirm_password']
@@ -132,39 +129,36 @@ def register():
     return redirect('/login')
 
 
-@app.route('/login', methods=['GET'])
-def show_login_form():
-    return render_template('login_postman.html')   
 
-# Handle login POST
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'GET':
+        return render_template('login_postman.html')
+
     username = request.form['username'].strip().lower()
     password = request.form['password']
-
     user = get_user_by_username(username)
-    if not user or not check_password(user['password'], password):
+
+    if not user or not bcrypt.check_password_hash(user.password, password):
         flash("Invalid credentials", "error")
         return redirect('/login')
 
     payload = {
-        'username': username,
-        'role': user['role'],
-        'exp': datetime.utcnow() + timedelta(hours=1)
+        'username': user.username,
+        'role': user.role,
+        'exp': datetime.utcnow() + timedelta(minutes=TOKEN_EXPIRATION_MINUTES)
     }
-    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
-    if isinstance(token,bytes):
+    if isinstance(token, bytes):
         token = token.decode('utf-8')
 
-    print(f" Generated JWT Token for {username}: {token}")
-
-    session['username'] = username
-    session['role'] = user['role']
+    session['username'] = user.username
+    session['role'] = user.role
     session['token'] = token
 
     flash("Login successful", "success")
-    return redirect('/') 
+    return redirect('/')
 
 
 @app.route('/api/posts', methods=['GET'])
@@ -280,14 +274,6 @@ def services():
 def team():
     return render_template('team.html')
  
-   
-   
-
-
-
-
-
-
 
 @app.route('/blog')
 def blog():
@@ -832,6 +818,8 @@ def subscribe():
  
 # =================== RUN APP ===================
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     port = int(os.environ.get("PORT", 5000))  # Use PORT from environment if available
     app.run(host="0.0.0.0", port=port, debug=True)
  

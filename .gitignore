@@ -39,3 +39,6 @@ logs/
 .cache
 nosetests.xml
 pytest_cache/
+
+
+!users.db
