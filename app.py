@@ -615,7 +615,7 @@ def undo_delete():
  
  
  
-# =================== MAIL CONFIG ===================
+# =================== MAIL CONFIG ================
  
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -627,7 +627,6 @@ app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 # Replace with your actual app password
 app.config['MAIL_DEFAULT_SENDER'] = ('YKrishi Foundation', os.getenv('YKRISHI_EMAIL'))
 mail = Mail(app)
- 
  
  
 @app.route('/contact', methods=['GET', 'POST'])
@@ -667,7 +666,8 @@ def contact():
  
     return render_template('contact.html')
  
-#=======================detecting location================
+#=======================detecting location===============
+
 # Add this function below the imports
 def get_city_from_ip():
     try:
@@ -686,14 +686,14 @@ city_data = {
             " Monitor leafhoppers and aphids weekly."
         ],
         "pest_alert": (
-            "- **Red cotton bug** active in dry spells.<br>"
+            "- Red cotton bug active in dry spells.<br>"
             "- Spray neem extract weekly.<br>"
             "- Install pheromone traps around the field."
         ),
         "fertilizer_tip": (
-            "- Apply **DAP** during initial soil preparation.<br>"
-            "- Use split doses of **urea** for better nitrogen efficiency.<br>"
-            "- Add **zinc sulphate** for micronutrient boost."
+            "- Apply DAP during initial soil preparation.<br>"
+            "- Use split doses of urea for better nitrogen efficiency.<br>"
+            "- Add zinc sulphate for micronutrient boost."
         )
     },
     "Delhi": {
@@ -703,14 +703,14 @@ city_data = {
             " Irrigate every 7–10 days in sandy soils."
         ],
         "pest_alert": (
-            "- **Whitefly alert** on leafy vegetables.<br>"
+            "- Whitefly alert on leafy vegetables.<br>"
             "- Deploy sticky yellow traps.<br>"
             "- Avoid excess nitrogen application."
         ),
         "fertilizer_tip": (
-            "- Apply **potash** for root crops like carrots and beets.<br>"
-            "- Split **urea** in two doses: sowing + 15 days.<br>"
-            "- Combine with **bone meal** for phosphorus."
+            "- Apply potash for root crops like carrots and beets.<br>"
+            "- Split urea in two doses: sowing + 15 days.<br>"
+            "- Combine with bone meal for phosphorus."
         )
     },
     "Chennai": {
@@ -720,22 +720,22 @@ city_data = {
             " Monitor for signs of early leaf blight."
         ],
         "pest_alert": (
-            "- **Stem borer** may appear in paddy.<br>"
+            "- Stem borer may appear in paddy.<br>"
             "- Use Tricho-cards (Trichogramma).<br>"
             "- Avoid late-night flood irrigation."
         ),
         "fertilizer_tip": (
-            "- Use **urea** + **super phosphate** during planting.<br>"
-            "- Add **potassium** to improve stem strength.<br>"
+            "- Use urea + super phosphate during planting.<br>"
+            "- Add potassium to improve stem strength.<br>"
             "- Prefer organic inputs in water-logged areas."
         )
     }
 }
  
- 
- 
+  
 #==============crop advisory====================#
- 
+
+
 @app.route("/crop-advisory")
 def crop_advisory():
     city = request.args.get('city')
@@ -781,7 +781,7 @@ def crop_advisory():
     else:
         print(" No specific data for", city)
  
-        # 🌾 Default fallback content
+        #  Default fallback content
         monthly_guide = [
             "- General advice: Prepare land and check irrigation systems.",
             "- Apply organic compost before sowing."
@@ -823,6 +823,8 @@ def subscribe():
     return redirect(return_url)
  
 # =================== RUN APP ===================
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Use PORT from environment if available
     app.run(host="0.0.0.0", port=port, debug=True)
