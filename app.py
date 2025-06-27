@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session,  get_flashed_messages , jsonify, make_response
 from flasgger import Swagger , swag_from
 from werkzeug.utils import secure_filename
-from flask_sqlalchemy import SQLAlchemy
-from models import db 
 import jwt
 import os
 import sqlite3
@@ -21,26 +19,10 @@ from urllib.parse import urlparse, urljoin
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
-bcrypt = Bcrypt(app)
-
-
-# Use PostgreSQL on Render (via DATABASE_URL) or fallback to SQLite locally
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///users.db")
-
-# Fix Render's postgres URL if needed (old URLs start with "postgres://")
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db.init_app(app)
-
-#JWT config
 SECRET_KEY = os.getenv('JWT_SECRET_KEY') or 'default_jwt_secret'
 ALGORITHM = 'HS256'
 TOKEN_EXPIRATION_MINUTES = 60
-
+bcrypt = Bcrypt(app)
 
 
 
@@ -49,14 +31,22 @@ TOKEN_EXPIRATION_MINUTES = 60
 def home():
     return render_template('index.html')
 
-def get_user_by_username(username):
-    return User.query.filter(User.username.ilike(username)).first()
 
+def get_user_by_username(username):
+    conn = sqlite3.connect('users.db')
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = cur.fetchone()
+    conn.close()
+    return user
 
 def create_user(username, hashed_pw, role):
-    new_user = User(username=username, password=hashed_pw, role=role)
-    db.session.add(new_user)
-    db.session.commit()
+    conn = sqlite3.connect('users.db')
+    cur = conn.cursor()
+    cur.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, hashed_pw, role))
+    conn.commit()
+    conn.close()
 
 def check_password(hashed_password, plain_password):
     return bcrypt.check_password_hash(hashed_password, plain_password)
@@ -115,11 +105,13 @@ def require_roles(*allowed_roles):
 
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'GET':
-        return render_template('register.html')
+@app.route('/register', methods=['GET'])
+def show_register_form():
+    return render_template('register.html')
 
+# Handle the form submission
+@app.route('/register', methods=['POST'])
+def register():
     username = request.form['username'].strip().lower()
     password = request.form['password']
     confirm_password = request.form['confirm_password']
@@ -140,36 +132,39 @@ def register():
     return redirect('/login')
 
 
+@app.route('/login', methods=['GET'])
+def show_login_form():
+    return render_template('login_postman.html')   
 
-@app.route('/login', methods=['GET', 'POST'])
+# Handle login POST
+@app.route('/login', methods=['POST'])
 def login():
-    if request.method == 'GET':
-        return render_template('login_postman.html')
-
     username = request.form['username'].strip().lower()
     password = request.form['password']
-    user = get_user_by_username(username)
 
-    if not user or not bcrypt.check_password_hash(user.password, password):
+    user = get_user_by_username(username)
+    if not user or not check_password(user['password'], password):
         flash("Invalid credentials", "error")
         return redirect('/login')
 
     payload = {
-        'username': user.username,
-        'role': user.role,
-        'exp': datetime.utcnow() + timedelta(minutes=TOKEN_EXPIRATION_MINUTES)
+        'username': username,
+        'role': user['role'],
+        'exp': datetime.utcnow() + timedelta(hours=1)
     }
-    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-    if isinstance(token, bytes):
+    if isinstance(token,bytes):
         token = token.decode('utf-8')
 
-    session['username'] = user.username
-    session['role'] = user.role
+    print(f" Generated JWT Token for {username}: {token}")
+
+    session['username'] = username
+    session['role'] = user['role']
     session['token'] = token
 
     flash("Login successful", "success")
-    return redirect('/')
+    return redirect('/') 
 
 
 @app.route('/api/posts', methods=['GET'])
@@ -829,8 +824,5 @@ def subscribe():
  
 # =================== RUN APP ===================
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     port = int(os.environ.get("PORT", 5000))  # Use PORT from environment if available
     app.run(host="0.0.0.0", port=port, debug=True)
- 
